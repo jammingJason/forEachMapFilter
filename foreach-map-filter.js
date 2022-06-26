@@ -6,8 +6,15 @@ Examples:
     doubleValues([5,1,2,3,10]) // [10,2,4,6,20]
 
 */
-function doubleValues(arr){
-    
+function doubleValues(arr) {
+	let newArr = [];
+	let total = 0;
+	arr.forEach(function(value) {
+		total = value * 2;
+		newArr.push(total);
+		total = 0;
+	});
+	return newArr;
 }
 
 /*
@@ -18,8 +25,14 @@ Examples:
     onlyEvenValues([5,1,2,3,10]) // [2,10]
 
 */
-function onlyEvenValues(arr){
-    
+function onlyEvenValues(arr) {
+	let newArr = [];
+	arr.forEach(function(value) {
+		if (value % 2 === 0) {
+			newArr.push(value);
+		}
+	});
+	return newArr;
 }
 
 /*
@@ -30,8 +43,14 @@ Examples:
     showFirstAndLast(['hi', 'goodbye', 'smile']) // ['hi', 'ge', 'se']
 
 */
-function showFirstAndLast(arr){
-    
+function showFirstAndLast(arr) {
+	let newArr = [];
+	arr.forEach(function(value, i, orgArr) {
+		let newStr = '';
+		newStr = value.charAt(0) + value.charAt(arr.length - 1);
+		newArr.push(newStr);
+	});
+	return newArr;
 }
 
 /*
@@ -43,8 +62,20 @@ Examples:
     // [{name: 'Elie', title:'instructor'}, {name: 'Tim', title:'instructor'}, {name: 'Matt', title:'instructor'}, {name: 'Colt', title:'instructor'}]
 
 */
-function addKeyAndValue(arr,key,value){
-    
+function addKeyAndValue(arr, key, value) {
+	// let newObj = {};
+	let newArr = [];
+	arr.forEach(function(val) {
+		for (const k in val) {
+			if (Object.hasOwnProperty.call(val, k)) {
+				const element = val[k];
+
+				newArr.push({ name: element, title: value });
+			}
+		}
+	});
+
+	return newArr;
 }
 
 /*
@@ -57,8 +88,25 @@ Examples:
     vowelCount('hmmm') // {};
     vowelCount('I Am awesome and so are you') // {i: 1, a: 4, e: 3, o: 3, u: 1};
 */
-function vowelCount(str){
-   
+function vowelCount(str) {
+	let newObj = {};
+	let newArr = Array.from(str);
+	let vowels = 'aeiou';
+	let intCount = 0;
+	newArr.forEach(function(letter) {
+		if (vowels.indexOf(letter) != -1) {
+			for (const key in newObj) {
+				if (Object.hasOwnProperty.call(newObj, key)) {
+					const element = newObj[key];
+				}
+			}
+
+			intCount++;
+			newObj[letter] = intCount;
+		}
+	});
+
+	// console.log(newObj);
 }
 
 /*
@@ -69,7 +117,12 @@ Examples:
     doubleValuesWithMap([1,-2,-3]) // [2,-4,-6]
 */
 
-function doubleValuesWithMap(arr) {}
+function doubleValuesWithMap(arr) {
+	const doubles = arr.map(function(muns) {
+		return muns * 2;
+	});
+	return doubles;
+}
 
 /*
 Write a function called valTimesIndex which accepts an array and returns a new array with each value multiplied by the index it is currently at in the array.
@@ -79,8 +132,11 @@ Examples:
     valTimesIndex([1,-2,-3]) // [0,-2,-6]
 */
 
-function valTimesIndex(arr){
-    
+function valTimesIndex(arr) {
+	const multiply = arr.map(function(muns, i) {
+		return muns * i;
+	});
+	return multiply;
 }
 
 /*
@@ -90,8 +146,16 @@ Examples:
     extractKey([{name: 'Elie'}, {name: 'Tim'}, {name: 'Matt'}, {name: 'Colt'}], 'name') // ['Elie', 'Tim', 'Matt', 'Colt']
 */
 
-function extractKey(arr, key){
-    
+function extractKey(arr, key) {
+	const arrKey = arr.map(function(value) {
+		for (const k in value) {
+			if (Object.hasOwnProperty.call(value, k)) {
+				const element = value[k];
+				return element;
+			}
+		}
+	});
+	return arrKey;
 }
 
 /*
@@ -101,8 +165,22 @@ Examples:
     extractFullName([{first: 'Elie', last:"Schoppik"}, {first: 'Tim', last:"Garcia"}, {first: 'Matt', last:"Lane"}, {first: 'Colt', last:"Steele"}]) // ['Elie Schoppik', 'Tim Garcia', 'Matt Lane', 'Colt Steele']
 */
 
-function extractFullName(arr){
-    
+function extractFullName(arr) {
+	const fullName = arr.map(function(value) {
+		let strName = '';
+		for (const key in value) {
+			if (Object.hasOwnProperty.call(value, key)) {
+				const element = value[key];
+				if (strName === '') {
+					strName = element;
+				} else {
+					strName = strName + ' ' + element;
+					return strName;
+				}
+			}
+		}
+	});
+	return fullName;
 }
 
 /*
@@ -112,7 +190,14 @@ Examples:
     filterByValue([{first: 'Elie', last:"Schoppik"}, {first: 'Tim', last:"Garcia", isCatOwner: true}, {first: 'Matt', last:"Lane"}, {first: 'Colt', last:"Steele", isCatOwner: true}], 'isCatOwner') // [{first: 'Tim', last:"Garcia", isCatOwner: true}, {first: 'Colt', last:"Steele", isCatOwner: true}]
 */
 
-function filterByValue(arr, key) {}
+function filterByValue(arr, key) {
+	const longWords = arr.filter(function(value) {
+		if (value[key]) {
+			return value;
+		}
+	});
+	return longWords;
+}
 
 /*
 Write a function called find which accepts an array and a value and returns the first element in the array that has the same value as the second parameter or undefined if the value is not found in the array.
@@ -122,7 +207,14 @@ Examples:
     find([1,2,3,4,5], 10) // undefined
 */
 
-function find(arr, searchValue) {}
+function find(arr, searchValue) {
+	const searchArr = arr.filter(function(value) {
+		if (value === searchValue) {
+			return value;
+		}
+	});
+	return searchArr[0];
+}
 
 /*
 Write a function called findInObj which accepts an array of objects, a key, and some value to search for and returns the first found value in the array.
