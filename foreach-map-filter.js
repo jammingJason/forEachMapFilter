@@ -46,17 +46,19 @@ Examples:
 */
 function showFirstAndLast(arr) {
 	let newArr = [];
-	arr.forEach(function(value, i, orgArr) {
+	arr.forEach(function(word) {
 		let newStr = '';
-		newStr = value.charAt(0) + value.charAt(arr.length - 1);
+		newStr = word.charAt(0) + '' + word.charAt(word.length - 1);
+		// console.log(arr.length - 1);
 		newArr.push(newStr);
 	});
-	console.log(newArr);
+	// console.log(arr);
 	return newArr;
 }
 
 /*
-Write a function called addKeyAndValue which accepts an array of objects, a key, and a value and returns the array passed to the function with the new key and value added for each object 
+Write a function called addKeyAndValue which accepts an array of objects, a key, and a value and 
+returns the array passed to the function with the new key and value added for each object 
 
 Examples:
     addKeyAndValue([{name: 'Elie'}, {name: 'Tim'}, {name: 'Matt'}, {name: 'Colt'}], 'title', 'instructor') 
@@ -65,18 +67,17 @@ Examples:
 
 */
 function addKeyAndValue(arr, key, value) {
-	// let newObj = {};
+	let newObj = {};
 	let newArr = [];
 	arr.forEach(function(val) {
 		for (const k in val) {
 			if (Object.hasOwnProperty.call(val, k)) {
 				const element = val[k];
-
-				newArr.push({ name: element, title: value });
+				console.log(element);
+				newArr.push({(newObj[k] = element)});
 			}
 		}
 	});
-
 	return newArr;
 }
 
@@ -96,19 +97,16 @@ function vowelCount(str) {
 	let vowels = 'aeiou';
 	let intCount = 0;
 	newArr.forEach(function(letter) {
-		if (vowels.indexOf(letter) != -1) {
-			for (const key in newObj) {
-				if (Object.hasOwnProperty.call(newObj, key)) {
-					const element = newObj[key];
-				}
+		if (vowels.indexOf(letter.toLowerCase()) !== -1) {
+			if (newObj[letter.toLowerCase()]) {
+				newObj[letter.toLowerCase()]++;
+			} else {
+				newObj[letter.toLowerCase()] = 1;
 			}
-
-			intCount++;
-			newObj[letter] = intCount;
 		}
+		intCount = 0;
 	});
-
-	// console.log(newObj);
+	return newObj;
 }
 
 /*
@@ -142,7 +140,8 @@ function valTimesIndex(arr) {
 }
 
 /*
-Write a function called extractKey which accepts an array of objects and some key and returns a new array with the value of that key in each object.
+Write a function called extractKey which accepts an array of objects and some key and 
+returns a new array with the value of that key in each object.
 
 Examples:
     extractKey([{name: 'Elie'}, {name: 'Tim'}, {name: 'Matt'}, {name: 'Colt'}], 'name') // ['Elie', 'Tim', 'Matt', 'Colt']
@@ -152,7 +151,7 @@ function extractKey(arr, key) {
 	const arrKey = arr.map(function(value) {
 		for (const k in value) {
 			if (Object.hasOwnProperty.call(value, k)) {
-				const element = value[k];
+				const element = value[key];
 				return element;
 			}
 		}
@@ -236,14 +235,17 @@ function findInObj(arr, key, searchValue) {
 					if (element === searchValue) {
 						if (intCount === 1) {
 							intCount = 2;
-							console.log(element[0]);
+							return value;
 						}
 					}
 				}
 			}
 		}
 	});
-	return firstItem;
+	if (firstItem.length === 0) {
+		return undefined;
+	}
+	return firstItem[0];
 }
 
 /*
@@ -269,7 +271,8 @@ function removeVowels(str) {
 }
 
 /*
-Write a function called doubleOddNumbers which accepts an array and returns a new array with all of the odd numbers doubled 
+Write a function called doubleOddNumbers which accepts an array and returns 
+a new array with all of the odd numbers doubled 
 (HINT - you can use map and filter to double and then filter the odd numbers).
 
 Examples:
@@ -277,4 +280,17 @@ Examples:
     doubleOddNumbers([4,4,4,4,4]) // []
 */
 
-function doubleOddNumbers(arr) {}
+function doubleOddNumbers(arr) {
+	const doubleOdd = arr.map(function(number) {
+		if (number % 2 !== 0) {
+			return number * 2;
+		}
+	});
+	const noUndefined = [];
+	doubleOdd.filter(function(value, i) {
+		if (value !== undefined) {
+			noUndefined.push(value);
+		}
+	});
+	return noUndefined;
+}
