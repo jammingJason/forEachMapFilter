@@ -68,13 +68,15 @@ Examples:
 */
 function addKeyAndValue(arr, key, value) {
 	let newObj = {};
+	let anotherObj = {};
+	anotherObj[key] = value;
 	let newArr = [];
 	arr.forEach(function(val) {
 		for (const k in val) {
 			if (Object.hasOwnProperty.call(val, k)) {
 				const element = val[k];
-				console.log(element);
-				newArr.push({(newObj[k] = element)});
+				newObj[k] = element;
+				// newArr.push({ name: element, title: value });
 			}
 		}
 	});
