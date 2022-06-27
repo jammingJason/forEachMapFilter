@@ -36,7 +36,8 @@ function onlyEvenValues(arr) {
 }
 
 /*
-Write a function called showFirstAndLast which accepts an array of strings and returns a new array with only the first and last character of each string.
+Write a function called showFirstAndLast which accepts an array of strings and returns a new array with only the first and 
+last character of each string.
 
 Examples:
     showFirstAndLast(['colt','matt', 'tim', 'test']) // ["ct", "mt", "tm", "tt"]
@@ -50,6 +51,7 @@ function showFirstAndLast(arr) {
 		newStr = value.charAt(0) + value.charAt(arr.length - 1);
 		newArr.push(newStr);
 	});
+	console.log(newArr);
 	return newArr;
 }
 
@@ -217,13 +219,32 @@ function find(arr, searchValue) {
 }
 
 /*
-Write a function called findInObj which accepts an array of objects, a key, and some value to search for and returns the first found value in the array.
+Write a function called findInObj which accepts an array of objects, a key, and some value to search for and returns the first 
+found value in the array.
 
 Examples:
     findInObj([{first: 'Elie', last:"Schoppik"}, {first: 'Tim', last:"Garcia", isCatOwner: true}, {first: 'Matt', last:"Lane"}, {first: 'Colt', last:"Steele", isCatOwner: true}], 'isCatOwner',true) // {first: 'Tim', last:"Garcia", isCatOwner: true}
 */
 
-function findInObj(arr, key, searchValue) {}
+function findInObj(arr, key, searchValue) {
+	let intCount = 1;
+	const firstItem = arr.filter(function(value) {
+		for (const k in value) {
+			if (Object.hasOwnProperty.call(value, k)) {
+				const element = value[k];
+				if (k === key) {
+					if (element === searchValue) {
+						if (intCount === 1) {
+							intCount = 2;
+							console.log(element[0]);
+						}
+					}
+				}
+			}
+		}
+	});
+	return firstItem;
+}
 
 /*
 Write a function called removeVowels which accepts a string and returns a new string with all of the vowels (both uppercased and lowercased) removed. Every character in the new string should be lowercased.
@@ -234,10 +255,22 @@ Examples:
     removeVowels('ZZZZZZ') // ('zzzzzz')
 */
 
-function removeVowels(str) {}
+function removeVowels(str) {
+	const newArr = Array.from(str.toLowerCase());
+	let newStr = '';
+	const vowels = 'aeiou';
+	const noVowels = newArr.filter(function(value) {
+		if (vowels.indexOf(value) === -1) {
+			return value;
+		}
+		// return newStr++;
+	});
+	return noVowels.join('');
+}
 
 /*
-Write a function called doubleOddNumbers which accepts an array and returns a new array with all of the odd numbers doubled (HINT - you can use map and filter to double and then filter the odd numbers).
+Write a function called doubleOddNumbers which accepts an array and returns a new array with all of the odd numbers doubled 
+(HINT - you can use map and filter to double and then filter the odd numbers).
 
 Examples:
     doubleOddNumbers([1,2,3,4,5]) // [2,6,10]
